@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FromSoftware - Dark Souls</title>
+    <link rel="stylesheet" href="../CSS/ds.css">
+</head>
+<body>
+    <header>
+        <h1 id="fromsoft-title">FromSoftware</h1>
+        <h1 id="dark-souls-title">Dark Souls</h1>
+        <button id="back-button" onclick="window.history.back()">Volver</button>
+        <button id="log-button" onclick="window.location.href='../HTML/index.html'">Iniciar Sesión</button>
+    </header>
+
+    <div class="table-container">
+        <table id="content-table">
+            <thead>
+                <tr>
+                    <th>Publicaciones</th>
+                </tr>
+            </thead>
+            <tbody id="table-content">
+                </tbody>
+        </table>
+    </div>
+
+    <img src="../CSS/mensaje.png" alt="Mensaje" id="message-button">
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-button">&times;</span>
+            <h2>Realizar publicacion</h2>
+            <textarea id="post-content" rows="10" cols="50" placeholder="Escribe aquí tu publicación..."></textarea>
+            <button id="save-button" class="save-button">Guardar Publicación</button>
+        </div>
+    </div>
+
+    <script>
+        // Espera a que el DOM esté completamente cargado
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("modal");
+            const messageButton = document.getElementById("message-button");
+            const closeButton = document.getElementById("close-button");
+            const tableContent = document.getElementById("table-content"); // Mueve la declaración aquí
+
+            // Función para cargar las publicaciones desde la base de datos
+            function loadPublications() {
+                fetch("../php/obtener_publicaciones.php")
+                .then(response => response.json())
+                .then(data => {
+                    // Limpiar el contenido actual de la tabla
+                    tableContent.innerHTML = '';
+
+                    // Agregar cada publicación a la tabla
+                    data.forEach(pub => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `<td>
+                                            <strong>${pub.usuario}</strong><br>
+                                            ${pub.contenido}
+                                        </td>`;
+                        tableContent.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al cargar publicaciones:', error));
+            }
+
+            // Cargar publicaciones al inicio
+            loadPublications();
+
+            // Abrir el modal
+            messageButton.onclick = function() {
+                modal.style.display = "block";
+            }
+
+            // Cerrar el modal
+            closeButton.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Cerrar modal al hacer clic fuera de él
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // Guardar publicación
+            document.getElementById("save-button").onclick = function() {
+                const content = document.getElementById("post-content").value; // Obtener contenido
+                if (!content.trim()) {
+                    alert("El contenido no puede estar vacío.");
+                    return; // No continuar si el contenido está vacío
+                }
+                const category_id = 1; // ID de Dark Souls
+                const user_id = 1; // Cambia esto por el ID del usuario que ha iniciado sesión
+
+                fetch("../php/guardar_publicacion.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ content: content, category_id: category_id, user_id: user_id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 'success') {
+                        loadPublications(); // Cargar publicaciones nuevamente
+                    }
+                    modal.style.display = "none"; // Cerrar modal
+                })
+                .catch(error => console.error('Error:', error));
+            };
+        });
+    </script>
+
+</body>
+</html>

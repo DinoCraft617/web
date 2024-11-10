@@ -1,0 +1,158 @@
+/* Usar la fuente Montserrat */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e3a5f; /* Color de fondo de la interfaz */
+    color: white;
+}
+
+/* Estilos de los encabezados */
+header {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    background-color: #1e3a5f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#fromsoft-title {
+    font-size: 2rem;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#dark-souls-title {
+    font-size: 2.5rem;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 10px;
+}
+
+/* Tabla centrada en la página */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 60vh;
+    padding-top: 60px; /* Aumenta el espacio entre la tabla y el encabezado */
+}
+
+#content-table {
+    border-collapse: collapse;
+    width: 80%;
+    background-color: #1e3a5f; /* Fondo de la tabla */
+    color: white;
+}
+
+#content-table th, #content-table td {
+    border: 2px solid #d4af37; /* Solo los bordes de la tabla en color dorado */
+    padding: 12px;
+    text-align: center;
+    background-color: #1e3a5f; /* Fondo de las celdas en color azul oscuro */
+    color: white; /* Texto en blanco */
+}
+
+#content-table th {
+    background-color: #1e3a5f; /* Fondo del encabezado en color azul oscuro */
+    color: white; /* Texto blanco */
+}
+
+#message-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px; /* Cambiado para colocarse a la derecha */
+    width: 100px; /* Ajuste del tamaño más pequeño */
+    height: 100px;
+    cursor: pointer;
+    z-index: 10; /* Asegura que esté por encima del contenido */
+    object-fit: cover; /* Para asegurar que la imagen se ajuste bien dentro del botón */
+}
+
+
+/* Estilos para el modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 100; /* Asegura que esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+}
+
+.modal-content {
+    background-color: #1e3a5f;
+    margin: 15% auto; /* Centrado */
+    padding: 20px;
+    border: 1px solid #d4af37; /* Borde dorado */
+    width: 80%; /* Ancho del modal */
+    color: white; /* Texto en blanco */
+}
+
+.close-button {
+    color: #d4af37; /* Color dorado para el botón de cerrar */
+    float: right; /* Alineado a la derecha */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: white; /* Cambia el color al pasar el mouse */
+}
+
+textarea {
+    width: 90%;
+    height: 150px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #1e3a5f;
+    color: white;
+    border: 1px solid #d4af37;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    resize: none;
+}
+
+.save-button {
+    background-color: #d4af37;
+    color: #1e3a5f;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+}
+
+.save-button:hover {
+    background-color: #f0c75e;
+}
+
+#back-button, #log-button {
+    padding: 10px 15px;
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 50px;
+}
+
+#log-button {
+    position: absolute;
+    right: 40px;
+}
+
+#back-button:hover {
+    background-color: #f0c75e; /* Color de fondo al pasar el ratón */
+}

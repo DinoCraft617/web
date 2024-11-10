@@ -1,0 +1,65 @@
+/* Reset general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+/* Estilo para el título */
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    color: black;
+    position: absolute;
+    top: 10px; /* Separación desde la parte superior */
+    left: 10px; /* Separación desde la parte izquierda */
+    z-index: 1; /* Asegura que el texto esté por encima de las imágenes */
+    background: none; /* Sin fondo */
+    pointer-events: none; /* Permite que las imágenes debajo sean clicables */
+}
+
+/* Estilos para el contenedor de las imágenes */
+section {
+    display: flex;
+    height: 100vh; /* 100% de la altura de la pantalla */
+    width: 100vw;  /* 100% del ancho de la pantalla */
+}
+
+section img {
+    width: 20vw; 
+    height: 100%;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+
+section img:hover {
+    cursor: pointer;            /* Cambia el cursor a pointer para indicar que es clickeable */
+    width: 50vw;                /* Aumenta el tamaño al pasar el ratón (25% del ancho de la ventana) */
+    opacity: 1;                 /* Aumenta la opacidad al 100% */
+    filter: contrast(120%);     /* Aumenta el contraste para destacar la imagen */
+}
+
+@media (max-width: 768px) {
+    section {
+        flex-direction: column;
+        height: auto;
+    }
+
+    section img {
+        width: 100vw; /* Cada imagen ocupa el 100% del ancho en pantallas pequeñas */
+        height: 50vh; /* Ajusta la altura para mantener el aspecto visual */
+        opacity: 1; /* Quita la opacidad para mayor claridad en pantallas pequeñas */
+    }
+
+    section img:hover {
+        width: 100vw; /* Evita el efecto de hover en pantallas pequeñas */
+        filter: none; /* Mantiene el contraste normal en pantallas pequeñas */
+    }
+}
