@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="../CSS/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>FROMSOFTWARE</h1>
+    </div>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <input type="text" name="user" class="input-field" value="Usuario" onfocus="clearText(this)">
+            <input type="password" name="password" class="input-field" value="Contraseña" onfocus="clearText(this)">
+            <input class="button" type="button" value="Iniciar Sesión" onclick="login()">
+            <input class="button" type="button" value="Registrarse" onclick="window.location.href='../HTML/registro.html'">
+        </form>
+    </div>
+    <div>
+        <h4>Regístrate para formar parte de un espacio donde los jugadores comparten soluciones,
+            estrategias y consejos valiosos para superar cualquier obstáculo en los videojuegos 
+            de FromSoftware.</h4>
+    </div>
+
+    <script>
+        function clearText(field) {
+            if (field.value === 'Usuario' || field.value === 'Contraseña') {
+                field.value = '';
+            }
+        }
+
+        function login() {
+            var user = $("input[name='user']").val();
+            var password = $("input[name='password']").val();
+            
+            $.ajax({
+                url: "/Proyecto/PHP/login.php",
+                method: "POST",
+                data: {
+                    user: user,
+                    password: password
+                },
+                success: function(response) {
+                    if (response.trim() === "success") {
+                        // Si el login es exitoso, redirigir a home.html
+                        window.location.href = "/Proyecto/HTML/home.html";
+                    } else {
+                        // Mostrar alerta en caso de error
+                        alert("Usuario o contraseña incorrectos.");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
